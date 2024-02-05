@@ -86,7 +86,7 @@
 <script>
     async function getShoppingList() {
         try {
-            const response = await fetch('http://localhost:3000/api/shopping-list');
+            const response = await fetch('http://localhost:4009/api/shopping-list');
             const data = await response.json();
             updateShoppingList(data);
         } catch (error) {
@@ -98,7 +98,7 @@
         const newItem = document.getElementById('newItem').value;
         if (newItem.trim() !== '') {
             try {
-                const response = await fetch('http://localhost:3000/api/shopping-list/add', {
+                const response = await fetch('http://localhost:4009/api/shopping-list/add', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -133,7 +133,7 @@
     });
     async function deleteItem(item) {
         try {
-            const response = await fetch(`http://localhost:3000/api/shopping-list/delete/${encodeURIComponent(item)}`, {
+            const response = await fetch(`http://localhost:4009/api/shopping-list/delete/${encodeURIComponent(item)}`, {
                 method: 'DELETE',
             });
             const result = await response.json();
