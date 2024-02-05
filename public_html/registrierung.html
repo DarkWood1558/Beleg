@@ -112,7 +112,7 @@
                 const result = await response.json();
                 if (result.success) {
                     var fs = require('fs');
-                    fs.writeFile("passwords.json", jsonData, function(err){
+                    fs.writeFile("/passwords.json", jsonData, function(err){
                         if (err) {
                             console.log(err);
                         }
