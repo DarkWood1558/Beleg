@@ -97,38 +97,33 @@
     </div>
 
     <script>
-        const fs = require('fs');
-
         async function registerUser() {
-            //document.getElementById('email').value = "Tester"
-            var user = {
-            username: document.getElementById('email').value,
-            password: document.getElementById('password').value,
-            };
-            //console.log("email: ", user.username)
-            //console.log("password: ", user.password)
-    fs.readFile('./passwords.json', 'utf8', (err, data) => {
-    /* if (err) throw err;
-    let users = JSON.parse(data);
-    console.log(users);
-    for (let user of users) {
-      if (user.username === username) {
-        throw 'Username is already taken!';
-      }
-    }
-    users.push({username: username, password: password});
-    var jsonString = JSON.stringify(users);
-    fs.writeFile('passwords.json', jsonString, err => {
-      if (err) {
-        console.log('Error writing file', err)
-      } else {
-        console.log('Successfully registered user')
-      }
-    }); */
-    console.log("readFile");
-  }); 
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
 
-        
+            try {
+                const response = await fetch('http://localhost:4009/api/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ email, password }),
+                }); 
+                const result = await response.json();
+                if (result.success) {
+                    var fs = require('fs');
+                    fs.writeFile("/passwords.json", jsonData, function(err){
+                        if (err) {
+                            console.log(err);
+                        }
+                    })
+                    alert(result.message);
+                } else {
+                    console.error(result.message);
+                }
+            } catch (error) {
+                console.error('Fehler bei der Registrierung:', error);
+            }
         }
     </script>
 </body>
