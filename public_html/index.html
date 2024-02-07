@@ -91,7 +91,7 @@
             <label for="password">Passwort:</label>
             <input type="password" id="password" required>
 
-            <button type="button" onclick="loginUser()">Anmelden</button>
+            <button type="button" onclick="goToEinaufsliste()">Anmelden</button>
         </form>
         <p>Noch keinen Account? <a href="registrierung.html">Registrieren</a></p>
     </div>
@@ -121,6 +121,9 @@
                 console.error('Fehler bei der Anmeldung:', error);
             }
         }
+        function goToEinaufsliste() {
+        window.location.href = 'einkaufsliste.html';
+    } 
     </script>
 </body>
 </html>

@@ -91,7 +91,7 @@
             <label for="password">Passwort:</label>
             <input type="password" id="password" required>
 
-            <button type="button" onclick="registerUser()">Registrieren</button>
+            <button type="button" onclick="goToIndexPage()">Registrieren</button>
         </form>
         <p>Bereits einen Account? <a href="index.html">Anmelden</a></p>
     </div>
@@ -131,6 +131,9 @@
 
         
         }
+        function goToIndexPage() {
+        window.location.href = 'index.html';
+    } 
     </script>
 </body>
 </html>

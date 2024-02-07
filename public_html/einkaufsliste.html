@@ -94,58 +94,45 @@
         }
     }
 
-    async function addItem() {
-        const newItem = document.getElementById('newItem').value;
-        if (newItem.trim() !== '') {
-            try {
-                const response = await fetch('http://localhost:4009/api/shopping-list/add', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ item: newItem }),
-                });
-                const result = await response.json();
-                if (result.success) {
-                    getShoppingList(); // Aktualisiere die Einkaufsliste nach dem Hinzufügen
-                } else {
-                    console.error('Fehler beim Hinzufügen des Artikels:', result.message);
-                }
-            } catch (error) {
-                console.error('Fehler beim Hinzufügen des Artikels:', error);
-            }
-        }
-    }
+    
 
     function updateShoppingList(items) {
-        const ul = document.querySelector('ul');
-        ul.innerHTML = '';
-        items.forEach(item => {
-            const li = document.createElement('li');
-            li.textContent = item;
-            ul.appendChild(li);
-        });
-    }
+    const ul = document.querySelector('ul');
+    ul.innerHTML = '';
+
+    items.forEach(item => {
+        const li = document.createElement('li');
+        li.textContent = item;
+
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = 'Löschen';
+        deleteButton.addEventListener('click', () => deleteItem(item));
+
+        li.appendChild(deleteButton);
+        ul.appendChild(li);
+    });
+}
 
     // Lade die Einkaufsliste beim Laden der Seite
     document.addEventListener('DOMContentLoaded', () => {
         getShoppingList();
     });
-    async function deleteItem(item) {
-        try {
-            const response = await fetch(`http://localhost:4009/api/shopping-list/delete/${encodeURIComponent(item)}`, {
-                method: 'DELETE',
-            });
-            const result = await response.json();
-            if (result.success) {
-                getShoppingList(); // Aktualisiere die Einkaufsliste nach dem Löschen
-            } else {
-                console.error('Fehler beim Löschen des Artikels:', result.message);
-            }
-        } catch (error) {
-            console.error('Fehler beim Löschen des Artikels:', error);
-        }
+    function deleteItem(item) {
+    // Get the existing list items
+    const ul = document.querySelector('ul');
+    const items = ul.getElementsByTagName('li');
+    ul.removeChild(li);
+    // Find the index of the item to be deleted
+    const indexToDelete = Array.from(items).findIndex(li => li.textContent === item);
+
+    // Remove the item if found
+    if (indexToDelete !== -1) {
+        ul.removeChild(items[indexToDelete]);
+    } else {
+        console.error('Item not found for deletion:', item);
     }
+    
+}
 </script>
 <body>
     <div class="list-container">
@@ -165,21 +152,16 @@
                 var ul = document.querySelector('ul');
                 var li = document.createElement('li');
                 li.textContent = newItem;
+
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = 'Löschen';
+                deleteButton.addEventListener('click', () => deleteItem(newItem));
+
+                li.appendChild(deleteButton);
                 ul.appendChild(li);
+
                 document.getElementById('newItem').value = '';
             }
-        }
-        function deleteItemButton(item) {
-            const ul = document.querySelector('ul');
-            const li = document.createElement('li');
-            const deleteButton = document.createElement('button');
-
-            li.textContent = item;
-            deleteButton.textContent = 'Löschen';
-            deleteButton.addEventListener('click', () => deleteItem(item));
-
-            li.appendChild(deleteButton);
-            ul.appendChild(li);
         }
         function updateShoppingList(items) {
             const ul = document.querySelector('ul');
