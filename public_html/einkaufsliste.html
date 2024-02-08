@@ -126,7 +126,7 @@
     const indexToDelete = Array.from(items).findIndex(li => li.textContent === item);
 
     // Remove the item if found
-    if (indexToDelete !== -1) {
+    if (indexToDelete!== -1) {
         ul.removeChild(items[indexToDelete]);
     } else {
         console.error('Item not found for deletion:', item);
