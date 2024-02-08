@@ -117,22 +117,7 @@
     document.addEventListener('DOMContentLoaded', () => {
         getShoppingList();
     });
-    function deleteItem(item) {
-    // Get the existing list items
-    const ul = document.querySelector('ul');
-    const items = ul.getElementsByTagName('li');
-    ul.removeChild(li);
-    // Find the index of the item to be deleted
-    const indexToDelete = Array.from(items).findIndex(li => li.textContent === item);
-
-    // Remove the item if found
-    if (indexToDelete !== -1) {
-        ul.removeChild(items[indexToDelete]);
-    } else {
-        console.error('Item not found for deletion:', item);
-    }
     
-}
 </script>
 <body>
     <div class="list-container">
@@ -149,13 +134,14 @@
         function addItem() {
             var newItem = document.getElementById('newItem').value;
             if (newItem.trim() !== '') {
+              
                 var ul = document.querySelector('ul');
                 var li = document.createElement('li');
                 li.textContent = newItem;
 
                 const deleteButton = document.createElement('button');
                 deleteButton.textContent = 'Löschen';
-                deleteButton.addEventListener('click', () => deleteItem(newItem));
+                deleteButton.addEventListener('click', () => deleteItem(li));
 
                 li.appendChild(deleteButton);
                 ul.appendChild(li);
@@ -179,6 +165,22 @@
                 ul.appendChild(li);
             });
         }
+        function deleteItem(item) {
+    // Get the existing list items
+    const ul = document.querySelector('ul');
+    const items = ul.getElementsByTagName('li');
+    ul.removeChild(item);
+    // Find the index of the item to be deleted
+    /* const indexToDelete = Array.from(items).findIndex(li => li.textContent === item);
+
+    // Remove the item if found
+    if (indexToDelete !== -1) {
+        ul.removeChild(items[indexToDelete]);
+    } else {
+        console.error('Item not found for deletion:', item);
+    } */
+    
+}
     </script>
 </body>
 </html>
